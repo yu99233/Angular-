@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../0 App_Theme/style/weibo.css" rel="stylesheet" />
+    <script src="../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        angular.module("test", []).controller("main", function ($scope, $http) {
+            $scope.msg_list = [];
+            $scope.now = 1;
+
+            //显示
+            getPage(1);
+
+            function getPage(n) {
+                $scope.now = n;
+                var url = 'thes.ashx?action=look&pageIndex='+n;
+                $http.get(url).then(res=> {
+                    $scope.msg_list = res.data;
+                }, () => {
+                    alert('获取留言失败，请刷新重试');
+                });
+            }
+
+            //显示页码
+            $http.get('thes.ashx?action=page').then(res=> {
+                $scope.pages = [];
+                var count = parseInt(res.data);
+                for (var i = 1; i <= count ; i++) {
+                    $scope.pages.push(i)
+                }
+            }, () => {
+                alert("错误");
+            });
+
+            //换页
+            $scope.setPage = getPage;
+
+            //添加
+            $scope.addMsg = function () {
+                var con = `${$scope.txt}`;
+                var url = 'thes.ashx?action=add&' + 'con=' + con;
+                $http.get(url).then(res=> {
+                    $scope.msg_list.unshift({
+                        ID: res.data.ID,
+                        Content: $scope.txt,
+                        Times: res.data.Times,
+                        Acc: 0,
+                        Ref: 0
+                    });
+
+                    if ($scope.msg_list.length > 5) {
+                        $scope.msg_list.pop();
+                    }
+
+                    $scope.txt = '';    //清空输入框
+
+                }, () => {
+                    alert("worning!");
+                });
+            }
+
+            //删除
+            $scope.del = function (id) {
+                var url = 'thes.ashx?action=del&' + 'con=' + id;
+                $http.get(url).then(res=> {
+                    $scope.msg_list = $scope.msg_list.filter(json=> {
+                        if (json.ID == id) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    })
+                }, () => {
+                    alert("错误!");
+                });
+            }
+
+            //踩
+            $scope.ref = function (id) {
+                var url = 'thes.ashx?action=ref&' + 'con=' + id;
+                $http.get(url).then(res=> {
+                    $scope.msg_list.forEach(json=> {
+                        if (json.ID==id) {
+                            json.Ref++;
+                        }
+                    });
+                }, () => {
+                    alert("错了");
+                })
+            }
+
+            //顶
+            $scope.acc = function (id) {
+                var url = 'thes.ashx?action=acc&' + 'con=' + id;
+                $http.get(url).then(res=> {
+                    $scope.msg_list.forEach(json=> {
+                        if (json.ID == id) {
+                            json.Acc++;
+                        }
+                    });
+                }, () => {
+                    alert("错了");
+                })
+            }
+
+        });
+    </script>
+</head>
+<body ng-controller="main">
+    <div class="znsArea">
+        <!--留言-->
+        <div class="takeComment">
+            <textarea name="textarea" class="takeTextField" ng-model="txt"></textarea>
+            <div class="takeSbmComment">
+                <input type="button" value="" class="inputs" ng-click="addMsg()" />
+                <span>(可按 Enter 回复)</span>
+            </div>
+        </div>
+
+        <!--已留-->
+        <div class="commentOn">
+
+            <div class="page">
+                <a href="javascript:;" ng-repeat="i in pages" ng-class="i==now?'active':''" ng-click="setPage(i)">{{i}}</a>
+            </div>
+
+            <div class="messList" id="msg_box">
+                <div class="reply" ng-repeat="json in msg_list">
+                    <p class="replyContent">{{json.Content}}</p>
+
+                    <p class="operation">
+                        <span class="replyTime">{{json.Times*1000|date:"y-MM-dd HH:mm:ss"}}</span>
+                        <span class="handle">
+                            <a href="javascript:;" class="top" ng-click="acc(json.ID)">{{json.Acc}}</a>
+                            <a href="javascript:;" class="down_icon" ng-click="ref(json.ID)">{{json.Ref}}</a>
+                            <a href="javascript:;" class="cut" ng-click="del(json.ID)">删除</a>
+                        </span>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

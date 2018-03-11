@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+	<meta charset="utf-8" />
+    <script>
+        var mod = angular.module("test", []);
+
+        mod.controller("main", function ($scope, $http, $timeout) {
+            console.log(arguments);
+        });
+    </script>
+</head>
+<body ng-controller="main">
+
+</body>
+</html>

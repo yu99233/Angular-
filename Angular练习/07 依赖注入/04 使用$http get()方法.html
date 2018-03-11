@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../0 App_Theme/angular.js"></script>
+    <script src="../0 App_Theme/jquery.js"></script>
+    <script>
+        var mod = angular.module("test", []);
+        mod.controller("main", function ($scope, $http) {
+            $http.get("/0 file/arr.txt").then((res) => {
+                $scope.arr = res.data;
+            }, (err) => {
+                alert('worning');
+            });
+        });
+    </script>
+</head>
+<body ng-controller="main">
+    <ul>
+        <li ng-repeat="item in arr">{{item}}</li>
+    </ul>
+</body>
+</html>

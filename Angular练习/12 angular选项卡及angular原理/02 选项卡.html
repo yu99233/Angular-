@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        angular.module("test", []).controller("main", function ($scope) {
+            $scope.now = 1;
+            $scope.items = {
+                '按钮1': '123',
+                '按钮2': '456',
+                '按钮3': '789'
+            };
+            $scope.setNow = function (num) {
+                $scope.now = num;
+                $scope.index = num;
+            }
+        });
+    </script>
+    <style media="screen">
+        .box input {
+            background: #CCC;
+        }
+
+            .box input.active {
+                background: yellow;
+            }
+
+        .box div {
+            width: 200px;
+            height: 200px;
+            background: #CCC;
+            border: 1px solid black;
+            display: none;
+        }
+
+            .box div.cur {
+                display: block;
+            }
+    </style>
+</head>
+<body ng-controller="main">
+    <div class="box">
+        <input type="button" ng-repeat="(k,v) in items" value="{{k}}" class="{{$index==now?'active':''}}" ng-click="setNow($index)" />
+
+        <div ng-repeat="v in items" class="{{$index==now?'cur':''}}">
+            {{v}}
+        </div>
+        {{index}}
+    </div>
+</body>
+</html>

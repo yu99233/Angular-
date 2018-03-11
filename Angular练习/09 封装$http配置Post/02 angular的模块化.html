@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        //总模块
+        var mod_c = angular.module("test", ["text1", "text2"]);
+
+        //模块一
+        var mod_a = angular.module("text1", []);
+        mod_a.controller("text_a", function ($scope) {
+            $scope.a = 12;
+        });
+
+        //模块二
+        var mod_b = angular.module("text2", []);
+        mod_b.controller("text_b", function ($scope) {
+            $scope.b = 5;
+        });
+
+
+    </script>
+</head>
+<body ng-controller="text_b">
+    {{b}}
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html ng-app="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <style media="screen">
+        .a {
+            width: 200px;
+        }
+
+        .b {
+            height: 200px;
+        }
+
+        .c {
+            background: #CCC;
+        }
+    </style>
+</head>
+<body ng-init="a='a b c';b=['a','b','c']">
+    <div class="{{a}}"></div><br />
+
+    <div ng-class="b"></div>
+</body>
+</html>

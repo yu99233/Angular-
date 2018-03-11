@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angular练习", "Angular练习\Angular练习.csproj", "{762523BA-D2BE-4344-A9C8-6235AC46CD5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angular练习二", "Angular练习二\Angular练习二.csproj", "{F4519CAF-C68B-4B48-9B50-4EDACFE88F72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{762523BA-D2BE-4344-A9C8-6235AC46CD5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{762523BA-D2BE-4344-A9C8-6235AC46CD5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{762523BA-D2BE-4344-A9C8-6235AC46CD5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{762523BA-D2BE-4344-A9C8-6235AC46CD5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4519CAF-C68B-4B48-9B50-4EDACFE88F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4519CAF-C68B-4B48-9B50-4EDACFE88F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4519CAF-C68B-4B48-9B50-4EDACFE88F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4519CAF-C68B-4B48-9B50-4EDACFE88F72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

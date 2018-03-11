@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html ng-app="text">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../0 App_Theme/angular.js"></script>
+    <script>
+        var mod = angular.module("text", []);
+        mod.controller("main", function ($scope, $http) {
+            $scope.clic = function () {
+                $http.post("/0 file/a.ashx", { a: $scope.a, b: $scope.b }).then(res=> {
+                    $scope.c = res.data;
+                    console.log(res.data);
+
+                }, () => {
+                    alert('错了');
+                });
+            }
+        });
+
+        //angular post返回的是json格式的,大多数浏览器不认,所以值一直是 0
+            //Content-Type:application/json;charset=UTF-8
+        //如果是原生的js,则返回的是:
+            //Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+    </script>
+</head>
+<body ng-controller="main">
+    <input type="text" ng-model="a" />
+    <input type="text" ng-model="b" />
+    <input type="button" name="name" value="提交" ng-click="clic()" /><br />
+    {{c}}
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html ng-app="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h3>方式一:</h3>
+    <ng-form name="form1" actions="http://it.kaikeba.com/" method="get">
+        邮箱:
+        <input type="email" ng-model="email" name="email"/><span ng-show="form1.email['$invalid']">邮箱错误</span>
+    </ng-form>
+
+    <br />
+
+    <h3>方式二:</h3>
+    <ng-form name="user_form" action="index.html" method="post">
+        邮箱:
+        <input type="email" name="emails" ng-model="emails" required/>
+        <span ng-show="user_form.emails.$error.required">必填</span>
+        <sapn ng-show="user_form.emails.$error.email">请填写正确的邮箱</sapn>
+    </ng-form>
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="../../0 App_Theme/Content/bootstrap.css" rel="stylesheet" />
+    <script src="../../0 App_Theme/angular.js"></script>
+    <script>
+        var mod = angular.module("mod", []);
+
+        mod.service("procuctData", function () {
+            return [
+                { id: 123, name: '电脑', price: 2000 },
+                { id: 456, name: '手机', price: 3000 },
+                { id: 789, name: '平板', price: 4000 },
+                { id: 147, name: '录音机', price: 5000 },
+                { id: 369, name: 'Ipad', price: 6000 }
+            ]
+        });
+
+        var con = mod.controller("test", function ($scope, procuctData) {
+            $scope.Data = procuctData;
+            $scope.orderType = 'id';
+            $scope.order = '-';
+
+            $scope.changeOrder = function (type) {
+                $scope.orderType = type;
+                if ($scope.order == '') {
+                    $scope.order = '-';
+                } else {
+                    $scope.order = '';
+                }
+            }
+        });
+    </script>
+    <style>
+        .orderColor {
+            color: red;
+        }
+    </style>
+</head>
+<body ng-app="mod" ng-controller="test">
+    <div class="bs-example container" data-example-id="hoverable-table">
+        <input type="text" class="form-control" placeholder="请输入字段名" style="margin-top:20px;" ng-model="search.id" />
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th ng-click="changeOrder('id')" ng-class="{dropup:order==''}">
+                        编号
+                        <span class="caret" ng-class="{orderColor:orderType=='id'}"></span>
+                    </th>
+                    <th ng-click="changeOrder('name')" ng-class="{dropup:order==''}">
+                        产品名称
+                        <span class="caret" ng-class="{orderColor:orderType=='name'}"></span>
+                    </th>
+                    <th ng-click="changeOrder('price')" ng-class="{dropup:order==''}">
+                        价格
+                        <span class="caret" ng-class="{orderColor:orderType=='price'}"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in Data | filter:search | orderBy:order+orderType">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.price | currency:"¥"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

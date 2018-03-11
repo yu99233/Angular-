@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="../../0 App_Theme/Content/bootstrap.css" rel="stylesheet" />
+    <script src="../../0 App_Theme/angular.js"></script>
+    <script>
+        var model = angular.module("test", []);
+        model.controller("main", function ($scope) {
+            $scope.Cart = [
+                { id: 1, name: '手机', quantity: 3, price: 4000 },
+                { id: 2, name: '平板', quantity: 4, price: 5000 },
+                { id: 3, name: '电脑', quantity: 5, price: 6000 },
+                { id: 4, name: '录音机', quantity: 6, price: 7000 },
+                { id: 5, name: '电视', quantity: 7, price: 8000 }
+            ];
+            //总价
+            $scope.totalPrice = function () {
+                var total = 0;
+                angular.forEach($scope.Cart, function (item) {
+                    //console.log(item);
+                    total += item.quantity * item.price;
+                });
+                return total;
+            }
+
+            //总数量
+            $scope.totalNo = function () {
+                var total = 0;
+                angular.forEach($scope.Cart, function (item) {
+                    total += item.quantity;
+                });
+                return total;
+            }
+
+            //找到元素的index
+            var findIndex = function (id) {
+                var index = -1;
+                angular.forEach($scope.Cart, function (item, key) {
+                    if (item.id == id) {
+                        //key 就是index
+                        index = key;
+                        return;
+                    }
+                });
+                console.log("index  " + index);
+                return index;
+            }
+
+            //移除
+            $scope.remove = function (id) {
+                var index = findIndex(id);
+                if (index != -1) {
+                    $scope.Cart.splice(index, 1);
+                }
+            }
+
+            //为产品减少数量
+            $scope.reduce = function (id) {
+                var index = findIndex(id);
+                console.log(index);
+                if (index != -1) {
+                    var item = $scope.Cart[index];
+                    --item.quantity;
+                } 
+            }
+
+            //为产品增加数量
+            $scope.add = function (obj) {
+                var index = findIndex(obj);
+                if (index != -1) {
+                    var item = $scope.Cart[index];
+                    ++item.quantity;
+                }
+            }
+
+            //监听数量,如果小于1,则让用户判断是否要删除产品
+            $scope.$watch('Cart', function (newVal, oldVal) {
+                angular.forEach(newVal, function (item, key) {
+                    if (item.quantity < 1) {
+                        var returnKey = confirm("是否从购物车删除该产品?");
+                        if (returnKey) {
+                            $scope.remove(item.id);
+                        } else {
+                            item.quantity = oldVal[key].quantity;
+                        }
+                    }
+                })
+            }, true);
+
+        });
+    </script>
+
+</head>
+<body ng-app="test" ng-cloak>
+    <div class="bs-docs-example container" ng-controller="main">
+        <table class="table table-striped" ng-show="Cart.length">
+            <thead>
+                <tr>
+                    <th>产品编号</th>
+                    <th>产品名称</th>
+                    <th>购买数量</th>
+                    <th>产品单价</th>
+                    <th>产品总价</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in Cart">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>
+                        <button type="button" ng-click="reduce(item.id)" class="btn tn-primary">-</button>
+                        <input type="text" name="name" style="width:30px;text-align:center" value="{{item.quantity}}" />
+
+                        <button type="button" ng-click="add(item.id)" class="btn tn-primary">+</button>
+                    </td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.price*item.quantity}}</td>
+                    <td>
+                        <input type="button" value="移除" class="btn btn-danger" ng-click="remove(item.id)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>总价</td>
+                    <td>{{totalPrice()}}</td>
+                    <td>总数量</td>
+                    <td>{{totalNo()}}</td>
+                    <td colspan="2"><input type="button" value="清空" class="btn btn-danger" ng-click="Cart={}" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 ng-show="!Cart.length">您的购物车为空!</h2>
+    </div>
+</body>
+</html>

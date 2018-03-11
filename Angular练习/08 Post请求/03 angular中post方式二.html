@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../0 App_Theme/angular.js"></script>
+    <script>
+        var mod = angular.module("test", []);
+        mod.controller("main", function ($scope, $http) {
+            $scope.clic = function () {
+                $http({
+                    method: 'post',
+                    url: '/0 file/a.ashx',
+                    data: { a: $scope.a, b: $scope.b },
+                    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function (obj) {
+                        var arr = [];
+                        for (var item in obj) {
+                            arr.push(`${item}=${obj[item]}`);
+                        }
+                        return arr.join('&');
+                    }
+                }).then(res=> {
+                    $scope.c = res.data;
+                }, f => {
+                    alert(f);
+                });
+            }
+        });
+    </script>
+    
+    <style>
+
+    </style>
+</head>
+<body ng-controller="main">
+    <input type="text" ng-model="a" />
+    <input type="text" ng-model="b" />
+    <input type="button" value="提交" ng-click="clic()" />
+    {{c}}
+</body>
+</html>

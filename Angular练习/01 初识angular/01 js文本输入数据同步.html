@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../0 App_Theme/jquery.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            var t = document.getElementById("txt");
+            var v = document.getElementById("div1");
+            t.oninput = function () {
+                v.innerText = t.value;
+            }
+        });
+
+    </script>
+
+
+</head>
+<body>
+    <input type="text" id="txt" value="" />
+    <div style="width:200px;height:200px;background-color:#b6ff00;" id="div1"></div>
+</body>
+</html>

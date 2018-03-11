@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../0 App_Theme/angular-1.5.8.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        var mod = angular.module("test", []);
+        mod.controller("main", function ($scope, $http) {
+            $scope.arr = [];
+            $scope.word = "";
+
+            $scope.$watch("word", function () {
+                $http.jsonp(`https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${$scope.word}&cb=JSON_CALLBACK`).then(res=> {
+                    $scope.arr = res.data.s;
+                }, () => {
+                    alert("错了!");
+                });
+            });
+        });
+    </script>
+</head>
+<body ng-controller="main">
+    <input type="text" ng-model="word" />
+    <ul>
+        <li ng-repeat="str in arr">{{str}}</li>
+    </ul>
+</body>
+</html>

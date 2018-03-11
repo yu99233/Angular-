@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        var mod = angular.module("mod", []);
+
+        mod.factory("oneFactory", function () {
+            return {
+                message: '赵丽颖 Hello World',
+                city: [
+                    { name: '迪丽热巴', age: 20 },
+                    { name: '杨幂', age: 22 },
+                    { name: '赵丽颖', age: 25 }
+                ]
+            }
+        })
+
+        mod.controller("con", function ($scope, oneFactory) {
+            $scope.date = oneFactory;
+            $scope.today = new Date;
+
+            $scope.checkName = function (obj) {
+                if (obj.name.indexOf('颖') === -1) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        });
+    </script>
+</head>
+<body ng-app="mod">
+    <div ng-controller="con">
+        <!--[1,2,3,4,5] 保留前五位-->
+        <h3>{{[1,2,3,4,5,6,7] | limitTo:5}}</h3>
+
+        <!--[3,4,5,6,7] 保留后五位-->
+        <h3>{{[11,2,3,4,5,6,7] | limitTo:-5}}</h3>
+
+        <!--赵丽颖 hello world-->
+        <h3>{{date.message | lowercase}}</h3>
+
+        <!--赵丽颖 HELLO WORLD-->
+        <h3>{{date.message | uppercase}}</h3>
+
+        <!--[{"name":"迪丽热巴","age":20}]-->
+        <h3>{{date.city | filter : '迪丽热巴'}}</h3>
+
+        <!--[{"name":"迪丽热巴","age":20}]-->
+        <h3>{{date.city | filter : {age:0} }}</h3>
+
+        <!--[{"name":"迪丽热巴","age":20}]-->
+        <h3>{{date.city | filter : checkName }}</h3>
+
+        <!--[{"name":"迪丽热巴","age":20}]-->
+        <h3>{{date.city | orderBy : 'age' }}</h3>
+
+        <!--[{"name":"迪丽热巴","age":20}]-->
+        <h3>{{date.city | orderBy : '-age' }}</h3>
+    </div>
+</body>
+</html>

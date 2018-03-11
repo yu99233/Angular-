@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        angular.module("test", []).controller("main", function ($scope) {
+            $scope.changed = function (m) {
+                console.log(m);
+                $scope.a = !m;
+            }
+        });
+    </script>
+</head>
+<body ng-controller="main">
+    <input type="button" value="选择" ng-click="changed(a)" />
+    <input type="checkbox" value="" ng-init="a=false" ng-checked="{{a}}" />
+</body>
+</html>

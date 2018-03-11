@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../0 App_Theme/angular.js"></script>
+    <script>
+        var mod = angular.module("test", [])
+        mod.controller("main", function ($scope) {
+            //$scope.name = "输入内容!";
+            $scope.count = 0;
+
+            $scope.$watch("name", function (newValue, oldValue) {
+
+                console.log(newValue);
+                console.log(oldValue);
+
+                if ($scope.count==10) {
+                    $scope.name = '滚!';
+                } else {
+                    ++$scope.count;
+                }
+            });
+        });
+    </script>
+</head>
+<body ng-app="test">
+    <div ng-controller="main" ng-init="name='输入内容'">
+        <input type="text" value="" ng-model="name" />
+        {{count}}
+    </div>
+</body>
+</html>

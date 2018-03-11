@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+	<meta charset="utf-8" />
+    <script>
+        var mod = angular.module("test", []);
+
+        mod.controller("cName", function ($scope) {
+            $scope.a = 0;
+            $scope.b = 0;
+            $scope.parseInt = function (obj) {
+                return parseInt(obj)
+            }
+        });
+     
+    </script>
+
+</head>
+<body ng-controller="cName"  ng-app="test">
+
+    <input type="text" ng-model="a" />
+    <input type="text" ng-model="b"/>
+    {{parseInt(a)+parseInt(b)}}
+
+</body>
+</html>

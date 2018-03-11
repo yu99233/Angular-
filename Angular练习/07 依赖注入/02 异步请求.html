@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+    <script src="../0 App_Theme/jquery.js"></script>	
+    <meta charset="utf-8" />
+    <script>
+        var mod = angular.module("test", []);
+        mod.controller("main", function ($scope) {
+            $.ajax({
+                url: "/0 file/arr.txt",
+                dataType: 'json',
+                success(res) {
+                    //$scope.arr = res;
+                    //$scope.$apply();
+                    $scope.arr = [12, 5, 10];
+                    $scope.$apply();
+                },
+                error() {
+                    alert('worning!');
+                }
+            });
+        });
+    </script>
+</head>
+<body ng-controller="main">
+    <ul>
+        <li ng-repeat="item in arr">
+            {{item}}
+        </li>
+    </ul>
+</body>
+</html>

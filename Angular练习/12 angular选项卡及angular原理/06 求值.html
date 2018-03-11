@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script>
+        var $scope = { a: 12, b: 5 };
+        var str = 'a*b';
+        for (var item in $scope) {
+            str = str.replace(new RegExp(name, 'g'), `$scope.${name}`);
+        }
+        console.log(eval(str));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+	<meta charset="utf-8" />
+    <script>
+        angular.module("test", []).filter("hiddenTel", function () {
+            return function (input, len) {
+                return input.substring(0,3)+''.padStart(len,'*')+input.substring(3+len);
+            }
+        });
+    </script>
+</head>
+<body ng-init="arr=[{name: '张三', tel: '13548795648'},{name: '小明', tel: '15887942587'},{name: '小红', tel: '13548795648'}]">
+    <ul>
+        <li ng-repeat="item in arr">
+            <h4>{{item.name}}</h4>
+            <span>{{item.tel|hiddenTel:5}}</span>
+        </li>
+    </ul>
+</body>
+</html>

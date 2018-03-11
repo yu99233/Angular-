@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        angular.module("mod", [])
+
+        .factory('oneFactory', function () {
+            return {
+                message: '共享的数据'
+            }
+        })
+
+        .controller("contOne", function ($scope, oneFactory) {
+            $scope.data = { name: '张三' };
+            $scope.Data = oneFactory;
+        })
+
+        .controller("contTwo", function ($scope, oneFactory) {
+            $scope.data2 = $scope.data;
+            $scope.Data2 = oneFactory;
+        });
+    </script>
+</head>
+<body ng-app="mod">
+    <div ng-controller="contOne">
+        firstData <input type="text" value="" ng-model="data.name" />
+        SecontData<input type="text" value="" ng-model="Data.message" />
+        <p>
+            firstSecond:{{data.name}}
+        </p>
+        <p>
+            firstSec:{{Data.message}}
+        </p>
+
+        <div ng-controller="contTwo">
+            <p>
+                conSecond:{{data2.name}}
+            </p>
+            <p>
+                conSec:{{Data2.message}}
+            </p>
+        </div>
+    </div>
+</body>
+</html>

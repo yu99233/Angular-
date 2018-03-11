@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        var mod = angular.module("mod", []);
+        mod.controller("cont", function ($scope) {
+            $scope.today = new Date;
+        });
+    </script>
+</head>
+<body ng-app="mod">
+    <div ng-controller="cont">
+        <!--123,456,789-->
+        <h3>{{123456789|number}}</h3>
+
+        <!--123,456,789.000  保留三位小数-->
+        <h3>{{123456789|number:3}}</h3>
+
+        <!--$123,456.00-->
+        <h3>{{123456|currency}}</h3>
+
+        <!--¥123,456.00-->
+        <h3>{{123456|currency:'¥'}}</h3>
+
+        <!--"2017-10-29T07:51:36.595Z"-->
+        <h3>{{today}}</h3>
+
+        <!--5229eiu52-->
+        <h3>{{today | date:'mdeium'}}</h3>
+
+        <!--10/29/17 3:52 PM-->
+        <h3>{{today | date:'short'}}</h3>
+
+        <!--Sunday, October 29, 2017->
+        <h3>{{today | date:'fullDate'}}</h3>
+
+        <!--October 29, 2017-->
+        <h3>{{today | date:'longDate'}}</h3>
+
+        <!--Oct 29, 2017-->
+        <h3>{{today | date:'mediumDate'}}</h3>
+
+        <!--10/29/17-->
+        <h3>{{today | date:'shortDate'}}</h3>
+
+        <!--5429eiu54Ti54e-->
+        <h3>{{today | date:'mdeiumTime'}}</h3>
+
+        <!--3:54 PM-->
+        <h3>{{today | date:'shortTime'}}</h3>
+    </div>
+</body>
+</html>

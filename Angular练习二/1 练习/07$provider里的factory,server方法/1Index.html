@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../../0 App_Theme/angular.js"></script>
+    <script>
+        var mod = angular.module("mod", [], function ($provide) {
+
+            $provide.provider("firstService", function () {
+                this.$get = function () {
+                    return {
+                        message:'sdfsd'
+                    }
+                }
+            });
+
+            //自定义工厂
+            $provide.factory("oneFactory", function () {
+                return [1,2,34,43,43,23];
+            });
+
+            //自定义服务
+            $provide.service('oneService', function () {
+                return '122222';
+            });
+
+        });
+
+        mod.controller("test", function ($scope, oneFactory, firstService, oneService) {
+            console.log(oneFactory);
+            console.log(firstService);
+            console.log(oneService);
+        });
+    </script>
+</head>
+<body ng-app="mod">
+    <div ng-controller="test">
+
+    </div>
+</body>
+</html>

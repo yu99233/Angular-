@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>多个控制器</title>
+    <meta charset="utf-8" />
+    <script src="../../0 App_Theme/angular.js"></script>
+    <script>
+        var model = angular.module("test", []);
+        model.controller("con", function ($scope, $http) {
+            $scope.name = "张三";
+        });
+
+        model.controller("conTwo", function ($scope, $http) {
+            $scope.name = "李四";
+        });
+    </script>
+</head>
+
+<body>
+    <div ng-app="test">
+        <div ng-controller="con">
+            <input type="text" value="" ng-model="name" />
+
+            <div ng-controller="conTwo">
+                <input type="text" ng-model="name"/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

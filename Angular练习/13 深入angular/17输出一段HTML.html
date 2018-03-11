@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        angular.module("test", []).controller("main", function ($scope, $sce) {
+            $scope.a = $sce.trustAsHtml('我叫<strong>123</strong>,我来自<a href="#">火星</a>')
+        })
+    </script>
+</head>
+<body ng-controller="main">
+    <div ng-bind-html="a"></div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../0 App_Theme/angular.js"></script>
+    <script src="../0 App_Theme/jquery.js"></script>
+    <script>
+
+        var mod = angular.module("test", []);
+        mod.controller("main", function ($scope, $interval, $timeout) {
+            $scope.a = 0;
+            $interval(function () {
+                $scope.a++;
+            }, 100);
+        });
+
+        mod.controller("main2", function ($scope, $interval, $timeout) {
+            $scope.b = 0;
+            $timeout(function () {
+                $scope.b++;
+            }, 100);
+
+        });
+
+    </script>
+</head>
+
+<body ng-app="test">
+
+    <div ng-controller="main">
+        a:{{a}}
+    </div>
+
+    <div ng-controller="main2">
+        b:{{b}}
+    </div>
+
+</body>
+</html>

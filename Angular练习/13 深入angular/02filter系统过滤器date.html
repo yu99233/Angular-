@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html ng-app="">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+	<meta charset="utf-8" />
+</head>
+<body ng-init="arr=[{title: '【2件装】莫代尔长袖t恤男V领纯色黑色秋衣服打底衫修身体恤小衫', price: 79, time: 1400536053838},{title: '骆驼牌男装 夏季男士潮流印花短袖t恤新款圆领半袖男生衣服体恤衫', price: 89, time: 1350531053838},{title: '男士夏季男装短袖t恤2017新款圆领半袖衣服韩版修身纯色体恤潮流', price: 19.9, time: 1240036003838}]">
+    <ul>
+        <li ng-repeat="item in arr">
+            <h4>{{item.title}}</h4>
+            <span>{{item.price|currency:"￥"}}</span>
+            <span>{{item.time|date:'y年MM月dd日 HH时mm分ss秒'}}</span>
+        </li>
+    </ul>
+</body>
+</html>

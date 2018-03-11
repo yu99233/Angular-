@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../../0 App_Theme/angular.js"></script>
+    <script>
+        var mod = angular.module("mod", [], function ($provide) {
+            console.log(1);
+            //自定义服务
+            $provide.provider('FirstServer', function () {
+                this.$get = function () {
+                    return {
+                        message: 'fwefew'
+                    }
+                }
+            });
+
+            $provide.provider("SecondServer", function () {
+                this.$get = function () {
+                    return {
+                        message:'122121'
+                    }
+                }
+            })
+
+
+        });
+
+        mod.controller("cont", function ($scope, FirstServer, SecondServer) {
+            $scope.name = '张三';
+            console.log(FirstServer);
+            console.log(SecondServer);
+        });
+    </script>
+</head>
+<body ng-app="mod">
+    <div ng-controller="cont">
+
+    </div>
+</body>
+</html>

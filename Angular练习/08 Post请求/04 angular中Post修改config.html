@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../0 App_Theme/angular.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        var mod = angular.module("test", []);
+
+        mod.config(function ($httpProvider) {
+            $httpProvider.defaults.transformRequest = function (obj) {
+                var arr = [];
+                for (var item in obj) {
+                    arr.push(`${item}=${obj[item]}`);
+                }
+                return arr.join('&');
+            };
+
+            $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+        });
+
+        //方法一:
+        //mod.controller("main", function ($scope, $http) {
+        //    $scope.clic = function () {
+        //        $http({
+        //            method: 'post',
+        //            url: '/0 file/a.ashx',
+        //            data: { a: $scope.a, b: $scope.b }
+        //        }).then(res=> {
+        //            $scope.c = res.data;
+        //        }, () => {
+        //            alert("worning!");
+        //        });
+        //    };
+        //});
+
+        //方法二:
+        mod.controller("main", function ($scope, $http) {
+            $scope.clic = function () {
+                $http.post('/0 file/a.ashx', { a: $scope.a, b: $scope.b }).then(res=> {
+                    $scope.c = res.data;
+                }, () => {
+                    alert("错误!");
+                });
+            };
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="main">
+        <input type="text" ng-model="a" />
+        <input type="text" ng-model="b" />
+        <input type="button" value="提交" ng-click="clic()" />
+        <br />
+        {{c}}
+    </div>
+</body>
+</html>
